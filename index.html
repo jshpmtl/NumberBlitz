@@ -1,0 +1,291 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Blitz - Retro Arcade</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<main class="a<pp">
+
+    <!-- INTRO SCREEN -->
+    <section id="introScreen" class="screen active intro-screen">
+
+        <div class="arcade-stars"></div>
+
+        <div class="intro-content">
+            <p class="intro-top-label">★ PLAYER 1 READY ★</p>
+
+            <div class="intro-pixel-logo">⚡</div>
+
+            <h1 class="intro-title">
+                NUMBER
+                <span>BLITZ</span>
+            </h1>
+
+            <p class="intro-subtitle">THE ULTIMATE NUMBER CHALLENGE</p>
+
+            <div class="pixel-divider">
+                <span></span><span></span><span></span>
+                <span></span><span></span><span></span>
+            </div>
+
+            <button id="introStartButton" class="arcade-start-button">
+                PRESS START
+            </button>
+
+            <p class="intro-instruction">THINK FAST. GUESS SMART.</p>
+            <p class="intro-version">INSERT COIN TO BEGIN • EST. 2026</p>
+        </div>
+
+        <div class="scanlines"></div>
+    </section>
+
+
+    <!-- HOME SCREEN -->
+    <section id="homeScreen" class="screen">
+        <div class="logo">⚡</div>
+        <p class="eyebrow">THE ULTIMATE NUMBER CHALLENGE</p>
+        <h1>NUMBER <span>BLITZ</span></h1>
+        <p class="subtitle">Think fast. Guess smart. Beat your record.</p>
+
+        <div class="record-preview">
+            <span>YOUR BEST RECORD</span>
+            <strong id="homeBestRecord">—</strong>
+            <small id="homeBestMode">NO RECORD YET</small>
+        </div>
+
+        <div class="menu-buttons">
+            <button id="playButton" class="btn primary">PLAY GAME</button>
+            <button id="recordsButton" class="btn secondary">RECORDS</button>
+            <button id="settingsButton" class="btn secondary">SETTINGS</button>
+            <button id="homeQuitButton" class="btn text-button">QUIT GAME</button>
+        </div>
+    </section>
+
+
+    <!-- DIFFICULTY SCREEN -->
+    <section id="difficultyScreen" class="screen">
+        <div class="logo">🎯</div>
+        <p class="eyebrow">CHOOSE YOUR CHALLENGE</p>
+        <h2>SELECT <span>DIFFICULTY</span></h2>
+        <p class="subtitle">How far can you go?</p>
+
+        <div class="difficulty-list">
+            <button class="difficulty-option easy" data-difficulty="easy">
+                <span class="difficulty-name">EASY</span>
+                <strong>1 – 50</strong>
+                <small>Beginner</small>
+            </button>
+
+            <button class="difficulty-option normal" data-difficulty="normal">
+                <span class="difficulty-name">NORMAL</span>
+                <strong>1 – 100</strong>
+                <small>Standard challenge</small>
+            </button>
+
+            <button class="difficulty-option hard" data-difficulty="hard">
+                <span class="difficulty-name">HARD</span>
+                <strong>1 – 500</strong>
+                <small>Advanced</small>
+            </button>
+
+            <button class="difficulty-option extreme" data-difficulty="extreme">
+                <span class="difficulty-name">EXTREME</span>
+                <strong>1 – 1,000</strong>
+                <small>Expert challenge</small>
+            </button>
+        </div>
+
+        <button id="difficultyBackButton" class="btn secondary">BACK HOME</button>
+    </section>
+
+
+    <!-- GAME SCREEN -->
+    <section id="gameScreen" class="screen">
+
+        <header class="game-header">
+            <button id="pauseButton" class="btn small secondary">Ⅱ PAUSE</button>
+            <div class="game-brand">⚡ NUMBER BLITZ</div>
+            <button id="gameHomeButton" class="btn small secondary">HOME</button>
+        </header>
+
+        <div class="game-content">
+
+            <p class="eyebrow" id="difficultyLabel">NORMAL MODE</p>
+
+            <p class="range-label">THE NUMBER IS BETWEEN</p>
+
+            <div class="number-range">
+                1 <span>—</span> <span id="maxNumberDisplay">100</span>
+            </div>
+
+            <div class="clue-card">
+                <p class="clue-label">YOUR CLUE</p>
+                <h2 id="clueNumber">?</h2>
+                <p id="clueText">Enter a number to begin!</p>
+            </div>
+
+            <div class="attempts-card">
+                <span>ATTEMPTS</span>
+                <strong id="attemptsDisplay">0</strong>
+            </div>
+
+            <form id="guessForm">
+                <label for="guessInput">ENTER YOUR GUESS</label>
+
+                <div class="guess-row">
+                    <input
+                        id="guessInput"
+                        type="number"
+                        min="1"
+                        max="1000"
+                        placeholder="Enter your guess"
+                        autocomplete="off"
+                        required
+                    >
+
+                    <button type="submit" class="btn primary guess-button">
+                        GUESS
+                    </button>
+                </div>
+            </form>
+
+            <p id="message" class="message" aria-live="polite"></p>
+
+            <div id="funFactCard" class="fun-fact-card hidden" aria-live="polite">
+                <div class="fun-fact-heading">
+                    <span class="fun-fact-icon">💡</span>
+                    <span>NUMBER DISCOVERY</span>
+                </div>
+
+                <p id="funFactCategory" class="fun-fact-category"></p>
+                <h3 id="funFactTitle"></h3>
+                <p id="funFactText"></p>
+
+                <p class="fun-fact-number">
+                    FACT UNLOCKED:
+                    <span id="funFactNumber"></span>/1000
+                </p>
+            </div>
+
+            <div id="resultActions" class="result-actions hidden">
+                <button id="againButton" class="btn primary">PLAY AGAIN</button>
+                <button id="changeDifficultyButton" class="btn secondary">CHANGE DIFFICULTY</button>
+                <button id="resultHomeButton" class="btn secondary">HOME</button>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- PAUSE SCREEN -->
+    <section id="pauseScreen" class="screen">
+        <div class="logo">Ⅱ</div>
+        <p class="eyebrow">TAKE YOUR TIME</p>
+        <h2>GAME <span>PAUSED</span></h2>
+        <p class="subtitle">Your game is waiting for you.</p>
+
+        <div class="menu-buttons">
+            <button id="resumeButton" class="btn primary">RESUME</button>
+            <button id="pauseHomeButton" class="btn secondary">HOME</button>
+            <button id="pauseQuitButton" class="btn text-button">QUIT GAME</button>
+        </div>
+    </section>
+
+
+    <!-- RECORDS SCREEN -->
+    <section id="recordsScreen" class="screen">
+        <div class="logo">🏆</div>
+        <p class="eyebrow">YOUR PERSONAL ACHIEVEMENTS</p>
+        <h2>YOUR <span>RECORDS</span></h2>
+
+        <div class="records-list">
+            <div class="record-row">
+                <span>EASY</span>
+                <strong id="easyRecord">—</strong>
+            </div>
+
+            <div class="record-row">
+                <span>NORMAL</span>
+                <strong id="normalRecord">—</strong>
+            </div>
+
+            <div class="record-row">
+                <span>HARD</span>
+                <strong id="hardRecord">—</strong>
+            </div>
+
+            <div class="record-row">
+                <span>EXTREME</span>
+                <strong id="extremeRecord">—</strong>
+            </div>
+        </div>
+
+        <button id="recordsHomeButton" class="btn secondary">BACK HOME</button>
+    </section>
+
+
+    <!-- SETTINGS SCREEN -->
+    <section id="settingsScreen" class="screen">
+        <div class="logo">⚙</div>
+        <p class="eyebrow">CUSTOMIZE YOUR EXPERIENCE</p>
+        <h2>GAME <span>SETTINGS</span></h2>
+
+        <div class="settings-panel">
+
+            <div class="setting-row">
+                <div>
+                    <strong>Background Music</strong>
+                    <p>Music while playing</p>
+                </div>
+
+                <button id="musicToggle" class="toggle-button" type="button">
+                    ON
+                </button>
+            </div>
+
+            <div class="setting-row">
+                <div>
+                    <strong>Sound Effects</strong>
+                    <p>Sounds for game actions</p>
+                </div>
+
+                <button id="sfxToggle" class="toggle-button" type="button">
+                    ON
+                </button>
+            </div>
+
+        </div>
+
+        <button id="settingsHomeButton" class="btn secondary">BACK HOME</button>
+    </section>
+
+
+    <!-- QUIT SCREEN -->
+    <section id="quitScreen" class="screen">
+        <div class="logo">⚠</div>
+        <p class="eyebrow">ARE YOU SURE?</p>
+        <h2>QUIT <span>GAME?</span></h2>
+        <p class="subtitle">Your current round will be ended.</p>
+
+        <div class="menu-buttons">
+            <button id="confirmQuitButton" class="btn danger">YES, QUIT</button>
+            <button id="cancelQuitButton" class="btn secondary">CANCEL</button>
+        </div>
+    </section>
+
+</main>
+
+<script src="script.js"></script>
+
+</body>
+</html> 
